@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý sản phẩm</title>
+</head>
+<body>
+
+<!-- Bước 1: Tạo một trang HTML với các thẻ cơ bản -->
+<h2>Quản lý sản phẩm</h2>
+
+<!-- Bước 2: Tạo một mảng chứa danh sách sản phẩm -->
+<script>
+  let danhSachSanPham = ["Sản phẩm 1", "Sản phẩm 2", "Sản phẩm 3"];
+</script>
+
+<!-- Bước 3: Xây dựng các hàm hiển thị danh sách sản phẩm, thêm một sản phẩm vào danh sách, sửa tên sản phẩm, xoá sản phẩm -->
+<script>
+  function hienThiDanhSachSanPham() {
+    let table = "<table border='1'><tr><th>Số thứ tự</th><th>Tên sản phẩm</th><th></th></tr>";
+    for (let i = 0; i < danhSachSanPham.length; i++) {
+      table += "<tr><td>" + (i + 1) + "</td><td onclick='suaSanPham(" + i + ")'>" + danhSachSanPham[i] + "</td><td><button onclick='xoaSanPham(" + i + ")'>Xoá</button></td></tr>";
+    }
+    table += "</table>";
+    document.body.innerHTML += table;
+  }
+
+  function themSanPham(tenSanPham) {
+    danhSachSanPham.push(tenSanPham);
+    hienThiDanhSachSanPham();
+    alert("Sản phẩm đã được thêm vào danh sách.");
+  }
+
+  function suaSanPham(index) {
+    let tenMoi = prompt("Nhập tên mới:");
+    if (tenMoi !== null) {
+      danhSachSanPham[index] = tenMoi;
+      hienThiDanhSachSanPham();
+    }
+  }
+
+  function xoaSanPham(index) {
+    danhSachSanPham.splice(index, 1);
+    hienThiDanhSachSanPham();
+  }
+</script>
+
+<!-- Bước 4: Gọi hàm hiển thị danh sách sản phẩm -->
+<script>
+  hienThiDanhSachSanPham();
+</script>
+
+<!-- Bước 5: Gọi hàm thêm một sản phẩm vào danh sách -->
+<h3>Thêm sản phẩm mới</h3>
+<form onsubmit="event.preventDefault(); themSanPham(this.tenSanPham.value);">
+  <label for="tenSanPham">Tên sản phẩm:</label>
+  <input type="text" id="tenSanPham" name="tenSanPham" required>
+  <button type="submit">Thêm</button>
+</form>
+
+</body>
+</html>
