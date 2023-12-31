@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>Palindrome Checker</h2>
+<label for="wordInput">Enter a word:</label>
+<input type="text" id="wordInput">
+<button onclick="checkPalindrome()">Check</button>
+<p id="result"></p>
+  <script>
+    function isPalindrome(s) {
+      // Chuyển đổi từ thành chữ thường và loại bỏ các ký tự không mong muốn
+        let cleanWord = s.toLowerCase().replace(/[^a-z]/g, '');
+        let check = (start,end) => {
+          if (start >= end){
+            return true;
+          }
+          if (cleanWord[start] !== cleanWord[end]) {
+            return false;
+          }
+          return check( start + 1 , end - 1 );
+      }
+          return check(0, cleanWord.length - 1);
+
+    }
+    function checkPalindrome() {
+        let inputWord = document.getElementById("wordInput").value;
+        let ketqua = document.getElementById("result");
+      if (inputWord.trim() === '') {
+        ketqua.innerHTML = 'Please enter a word.';
+      } else {
+        const isPalindromeResult = isPalindrome(inputWord);
+        ketqua.innerHTML = isPalindromeResult
+          ? `${inputWord} is a palindrome.`
+          : `${inputWord} is not a palindrome.`;
+      }
+    }
+  </script>
+</body>
+</html>
